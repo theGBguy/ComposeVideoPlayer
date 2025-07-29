@@ -1,6 +1,5 @@
-package io.github.thegbguy.composevideoplayer.ui.theme
+package io.github.thegbguy.composevideoplayer.presentation.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

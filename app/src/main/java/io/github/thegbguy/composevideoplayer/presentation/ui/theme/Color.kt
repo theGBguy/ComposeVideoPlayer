@@ -1,4 +1,4 @@
-package io.github.thegbguy.composevideoplayer.ui.theme
+package io.github.thegbguy.composevideoplayer.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

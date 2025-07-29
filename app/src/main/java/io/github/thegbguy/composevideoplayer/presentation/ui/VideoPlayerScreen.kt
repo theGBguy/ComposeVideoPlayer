@@ -1,4 +1,4 @@
-package io.github.thegbguy.composevideoplayer.ui
+package io.github.thegbguy.composevideoplayer.presentation.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,9 +13,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import io.github.thegbguy.composevideoplayer.ui.components.VideoPlayerView
-import io.github.thegbguy.composevideoplayer.ui.theme.LocalSpacing
-import io.github.thegbguy.composevideoplayer.viewmodel.VideoPlayerViewModel
+import io.github.thegbguy.composevideoplayer.presentation.viewmodel.VideoPlayerViewModel
+import io.github.thegbguy.composevideoplayer.presentation.ui.components.VideoPlayerView
+import io.github.thegbguy.composevideoplayer.presentation.ui.theme.LocalSpacing
 import kotlinx.coroutines.launch
 
 @Composable

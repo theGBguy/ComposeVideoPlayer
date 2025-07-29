@@ -8,8 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import io.github.thegbguy.composevideoplayer.ui.VideoPlayerScreen
-import io.github.thegbguy.composevideoplayer.ui.theme.ComposeVideoPlayerTheme
+import io.github.thegbguy.composevideoplayer.presentation.ui.VideoPlayerScreen
+import io.github.thegbguy.composevideoplayer.presentation.ui.theme.ComposeVideoPlayerTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

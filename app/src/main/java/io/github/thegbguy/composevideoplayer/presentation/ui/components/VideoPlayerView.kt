@@ -1,4 +1,4 @@
-package io.github.thegbguy.composevideoplayer.ui.components
+package io.github.thegbguy.composevideoplayer.presentation.ui.components
 
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -18,6 +18,7 @@ import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
+import kotlin.math.abs
 
 @OptIn(UnstableApi::class)
 @Composable
@@ -79,7 +80,7 @@ fun VideoPlayerView(
 
     // Seek to position if changed
     LaunchedEffect(currentPosition) {
-        if (kotlin.math.abs(exoPlayer.currentPosition - currentPosition) > 500) {
+        if (abs(exoPlayer.currentPosition - currentPosition) > 500) {
             exoPlayer.seekTo(currentPosition)
         }
     }

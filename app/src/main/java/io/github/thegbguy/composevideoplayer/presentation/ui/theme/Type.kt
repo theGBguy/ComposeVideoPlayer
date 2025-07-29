@@ -1,4 +1,4 @@
-package io.github.thegbguy.composevideoplayer.ui.theme
+package io.github.thegbguy.composevideoplayer.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

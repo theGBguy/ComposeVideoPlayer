@@ -1,10 +1,10 @@
 package io.github.thegbguy.composevideoplayer.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
-import io.github.thegbguy.composevideoplayer.data.repository.VideoRepositoryImpl
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import io.github.thegbguy.composevideoplayer.domain.model.PlaybackState
 import io.github.thegbguy.composevideoplayer.domain.model.VideoEntry
-import io.github.thegbguy.composevideoplayer.domain.repository.VideoRepository
 import io.github.thegbguy.composevideoplayer.domain.usecase.GetVideoFeedUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,16 +12,12 @@ import kotlinx.coroutines.flow.StateFlow
 /**
  * ViewModel for managing video playback state and video feed.
  *
- * @constructor Creates a VideoPlayerViewModel with a video repository.
+ * @constructor Injects the GetVideoFeedUseCase for retrieving the video feed.
  */
-class VideoPlayerViewModel : ViewModel() {
-    private val repository: VideoRepository = VideoRepositoryImpl()
-
-    /**
-     * Use case for retrieving the video feed.
-     */
-    private val getVideoFeedUseCase = GetVideoFeedUseCase(repository)
-
+@HiltViewModel
+class VideoPlayerViewModel @Inject constructor(
+    getVideoFeedUseCase: GetVideoFeedUseCase
+) : ViewModel() {
     private val _playbackState = MutableStateFlow(PlaybackState())
     val playbackState: StateFlow<PlaybackState> = _playbackState
 

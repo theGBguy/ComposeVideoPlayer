@@ -11,17 +11,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
-import io.github.thegbguy.composevideoplayer.presentation.viewmodel.VideoPlayerViewModel
 import io.github.thegbguy.composevideoplayer.presentation.ui.components.VideoPlayerView
 import io.github.thegbguy.composevideoplayer.presentation.ui.theme.LocalSpacing
+import io.github.thegbguy.composevideoplayer.presentation.viewmodel.VideoPlayerViewModel
 import kotlinx.coroutines.launch
 
 @Composable
 fun VideoPlayerScreen(
     modifier: Modifier = Modifier,
-    viewModel: VideoPlayerViewModel = viewModel()
+    viewModel: VideoPlayerViewModel = hiltViewModel()
 ) {
     val state by viewModel.playbackState.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()

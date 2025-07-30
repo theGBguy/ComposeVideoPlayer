@@ -43,7 +43,8 @@ fun VideoPlayerScreen(
     ) {
         VerticalPager(
             modifier = Modifier.fillMaxWidth(),
-            state = pagerState
+            state = pagerState,
+            beyondViewportPageCount = 1
         ) { page ->
             val video = viewModel.videoFeed[page]
             VideoPlayerView(

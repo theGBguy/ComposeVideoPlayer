@@ -6,7 +6,9 @@ import androidx.annotation.OptIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.net.toUri
@@ -25,12 +27,14 @@ import kotlin.math.abs
 fun VideoPlayerView(
     videoUrl: String,
     isPlaying: Boolean,
+    isActive: () -> Boolean,
     currentPosition: Long,
     onPositionChange: (Long) -> Unit,
     onPlaybackComplete: () -> Unit
 ) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
+    val isVideoActive by rememberUpdatedState(isActive)
 
     // Only create ExoPlayer when videoUrl changes
     val exoPlayer = remember(videoUrl) {
@@ -51,7 +55,7 @@ fun VideoPlayerView(
                 }
 
                 Lifecycle.Event.ON_RESUME -> {
-                    if (!exoPlayer.isPlaying) {
+                    if (isPlaying && isVideoActive() && !exoPlayer.isPlaying) {
                         exoPlayer.play()
                     }
                 }
@@ -66,16 +70,13 @@ fun VideoPlayerView(
         }
     }
 
-    // Release ExoPlayer when this composable leaves composition
-    DisposableEffect(exoPlayer) {
-        onDispose {
-            exoPlayer.release()
+    // Control playback state based on isActive and isPlaying
+    LaunchedEffect(isPlaying, isVideoActive) {
+        if (isVideoActive() && isPlaying) {
+            exoPlayer.play()
+        } else {
+            exoPlayer.pause()
         }
-    }
-
-    // Control playback state
-    LaunchedEffect(isPlaying) {
-        exoPlayer.playWhenReady = isPlaying
     }
 
     // Seek to position if changed
@@ -101,6 +102,8 @@ fun VideoPlayerView(
         exoPlayer.addListener(listener)
         onDispose {
             exoPlayer.removeListener(listener)
+            // Release ExoPlayer when this composable leaves composition
+            exoPlayer.release()
         }
     }
 

@@ -47,10 +47,12 @@ fun VideoPlayerScreen(
             beyondViewportPageCount = 1
         ) { page ->
             val video = viewModel.videoFeed[page]
+            val isActive = page == activeVideoIndex
             VideoPlayerView(
                 videoUrl = video.url,
-                isPlaying = page == activeVideoIndex && state.isPlaying,
-                currentPosition = if (page == activeVideoIndex) state.currentPosition else 0L,
+                isPlaying = state.isPlaying,
+                isActive = { isActive },
+                currentPosition = if (isActive) state.currentPosition else 0L,
                 onPositionChange = { viewModel.setCurrentPosition(it) },
                 onPlaybackComplete = {
                     scope.launch {
